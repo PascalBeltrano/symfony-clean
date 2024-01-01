@@ -1,0 +1,23 @@
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      
+        autoconfigure: true 
+
+    Domain\:
+        resource: '../src/Domain/*'
+        exclude:
+            - '../src/Domain/Entity/'
+ 
+    Infrastructure\:
+        resource: '../src/Infrastructure/*'
+        exclude:
+            - '../src/Infrastructure/Symfony/Kernel.php'
+            - '../src/Infrastructure/Tests/*'
+
+    Interface\:
+        resource: '../src/Interface/*'
+
+    Interface\Controller\:
+        resource: '../src/Interface/Controller/*'
+        tags: ['controller.service_arguments']

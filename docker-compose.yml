@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+    web:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile
+        container_name: clean.web
+        ports:
+            - 8000:8000
+        volumes:
+            - .:/var/www/html
+        working_dir: /var/www/html
+
+    pgsql:
+        image: postgres:latest
+        container_name: clean.pgsql
+        restart: always
+        environment:
+            POSTGRES_DB:        clean
+            POSTGRES_PASSWORD:  pgsql
+            POSTGRES_USER:      pgsql
+        volumes:
+            - ./docker/db/:/var/lib/postgresql/data:rw
+            
+
+    adminer:
+        image: adminer
+        container_name: clean.adminer
+        restart: always
+        ports:
+            - 8001:8080
